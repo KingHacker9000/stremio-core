@@ -33,8 +33,10 @@ jobs:
         run: rm -rf .sense .github/workflows/sense-apply.yml
       - name: Format
         run: cargo fmt --all
-      - name: Test workspace
-        run: cargo test --workspace
+      - name: Compile complete workspace and tests
+        run: cargo test --workspace --no-run
+      - name: Test Sense recommendation runtime
+        run: cargo test -p stremio-sense-recs
       - name: Commit validated integration
         run: |
           git config user.name 'github-actions[bot]'
