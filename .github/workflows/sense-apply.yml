@@ -1,0 +1,30 @@
+name: Apply Stremio Sense Core MVP
+on:
+  push:
+    branches: [sense-mvp]
+permissions:
+  contents: write
+jobs:
+  apply-test:
+    if: github.event.head_commit.message == 'Apply Stremio Sense Core MVP'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Apply Sense model
+        run: python .sense/apply.py .
+      - name: Remove patch kit
+        run: rm -rf .sense .github/workflows/sense-apply.yml
+      - name: Format
+        run: cargo fmt --all
+      - name: Test workspace
+        run: cargo test --workspace
+      - name: Commit validated integration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: add Stremio Sense Intelligence model'
+          git push origin HEAD:sense-mvp

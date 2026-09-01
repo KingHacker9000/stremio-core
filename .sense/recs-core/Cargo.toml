@@ -1,0 +1,9 @@
+[package]
+name = "stremio-sense-recs"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Platform-neutral local recommendation runtime for Stremio Sense"
+
+[lib]
+crate-type = ["rlib"]
