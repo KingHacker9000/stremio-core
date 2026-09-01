@@ -1130,6 +1130,7 @@ dependencies = [
  "sha2",
  "stremio-derive",
  "stremio-official-addons",
+ "stremio-sense-recs",
  "stremio-serde-hex",
  "stremio-watched-bitfield",
  "strum",
@@ -1193,6 +1194,10 @@ dependencies = [
  "deflate-macro",
  "flate2",
 ]
+
+[[package]]
+name = "stremio-sense-recs"
+version = "0.1.0"
 
 [[package]]
 name = "stremio-serde-hex"

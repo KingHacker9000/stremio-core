@@ -16,6 +16,7 @@ use stremio_core::{
         ctx::Ctx,
         data_export::DataExport,
         installed_addons_with_filters::InstalledAddonsWithFilters,
+        intelligence::Intelligence,
         library_with_filters::{ContinueWatchingFilter, LibraryWithFilters, NotRemovedFilter},
         link::Link,
         local_search::LocalSearch,
@@ -51,6 +52,7 @@ pub struct WebModel {
     pub search: CatalogsWithExtra,
     /// Pre-loaded results for local search
     pub local_search: LocalSearch,
+    pub intelligence: Intelligence,
     pub meta_details: MetaDetails,
     pub remote_addons: CatalogWithFilters<Descriptor>,
     pub installed_addons: InstalledAddonsWithFilters,
@@ -95,6 +97,7 @@ impl WebModel {
             auth_link: Default::default(),
             data_export: Default::default(),
             local_search,
+            intelligence: Intelligence::default(),
             continue_watching_preview,
             board: Default::default(),
             discover,
@@ -173,6 +176,7 @@ impl WebModel {
             }
             WebModelField::Calendar => serialize_calendar(&self.calendar),
             WebModelField::LocalSearch => serialize_local_search(&self.local_search),
+            WebModelField::Intelligence => serialize_intelligence(&self.intelligence),
             WebModelField::MetaDetails => serialize_meta_details::<WebEnv>(
                 &self.meta_details,
                 &self.ctx,

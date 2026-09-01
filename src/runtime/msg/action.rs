@@ -270,6 +270,20 @@ pub enum ActionLoad {
 
 #[derive(Clone, Deserialize, Debug)]
 #[serde(tag = "action", content = "args")]
+pub enum ActionIntelligence {
+    LoadIndex(Vec<u8>),
+    #[serde(rename_all = "camelCase")]
+    Similar {
+        id: String,
+        candidate_limit: usize,
+        result_limit: usize,
+        relevance_weight: f32,
+    },
+    Clear,
+}
+
+#[derive(Clone, Deserialize, Debug)]
+#[serde(tag = "action", content = "args")]
 pub enum ActionSearch {
     /// Request for Search queries
     #[serde(rename_all = "camelCase")]
@@ -293,6 +307,7 @@ pub enum Action {
     LibraryByType(ActionLibraryByType),
     LibraryWithFilters(ActionLibraryWithFilters),
     MetaDetails(ActionMetaDetails),
+    Intelligence(ActionIntelligence),
     StreamingServer(ActionStreamingServer),
     Player(ActionPlayer),
     Load(ActionLoad),

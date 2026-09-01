@@ -10,7 +10,8 @@ pub mod model {
         serialize_ctx::serialize_ctx, serialize_data_export::serialize_data_export,
         serialize_discover::serialize_discover,
         serialize_installed_addons::serialize_installed_addons,
-        serialize_library::serialize_library, serialize_local_search::serialize_local_search,
+        serialize_intelligence::serialize_intelligence, serialize_library::serialize_library,
+        serialize_local_search::serialize_local_search,
         serialize_meta_details::serialize_meta_details, serialize_player::serialize_player,
         serialize_remote_addons::serialize_remote_addons,
         serialize_streaming_server::serialize_streaming_server,
@@ -55,6 +56,7 @@ pub mod model {
     pub mod serialize_data_export;
     pub mod serialize_discover;
     pub mod serialize_installed_addons;
+    pub mod serialize_intelligence;
     pub mod serialize_library;
     pub mod serialize_local_search;
     pub mod serialize_meta_details;

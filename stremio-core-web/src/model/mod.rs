@@ -18,6 +18,9 @@ use serialize_discover::*;
 mod serialize_installed_addons;
 use serialize_installed_addons::*;
 
+mod serialize_intelligence;
+use serialize_intelligence::*;
+
 mod serialize_library;
 use serialize_library::*;
 

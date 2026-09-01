@@ -13,7 +13,7 @@ opt-level = 's'
 
 [workspace]
 resolver = "2"
-members = ["stremio-core-web", "stremio-derive", "stremio-watched-bitfield"]
+members = ["stremio-core-web", "stremio-derive", "stremio-watched-bitfield", "stremio-sense-recs"]
 
 [features]
 # TODO: env-future-send should be enabled by default
@@ -39,6 +39,7 @@ deflate = ["stremio-official-addons/deflate"]
 [dependencies]
 stremio-derive = { path = "stremio-derive" }
 stremio-watched-bitfield = { path = "stremio-watched-bitfield" }
+stremio-sense-recs = { path = "stremio-sense-recs" }
 stremio-official-addons = "=2.1.2"
 
 # (De)Serialization

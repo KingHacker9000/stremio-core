@@ -16,7 +16,10 @@ use stremio_core::{
         STREAMING_SERVER_URLS_STORAGE_KEY, STREAMS_STORAGE_KEY,
     },
     models::common::Loadable,
-    runtime::{msg::Action, Env, EnvError, Runtime, RuntimeAction, RuntimeEvent},
+    runtime::{
+        msg::{Action, ActionIntelligence},
+        Env, EnvError, Runtime, RuntimeAction, RuntimeEvent,
+    },
     types::{
         events::DismissedEventsBucket,
         library::LibraryBucket,
@@ -241,6 +244,18 @@ pub fn get_state(field: JsValue) -> Result<JsValue, JsValue> {
         .model()
         .map_err(|_| GetStateError::State(State::ModelReadFailed))?;
     Ok(model.get_state(&field))
+}
+
+#[wasm_bindgen]
+pub fn load_sense_index(bytes: &[u8]) -> Result<(), JsValue> {
+    let runtime_action: RuntimeAction<WebEnv, WebModel> = RuntimeAction {
+        action: Action::Intelligence(ActionIntelligence::LoadIndex(bytes.to_vec())),
+        field: Some(WebModelField::Intelligence),
+    };
+    dispatch_internal(runtime_action, None).map_err(|state_err| {
+        error!(?state_err, "Failed to load Sense index due to");
+        JsValue::from(DispatchError::State(state_err))
+    })
 }
 
 #[wasm_bindgen]
